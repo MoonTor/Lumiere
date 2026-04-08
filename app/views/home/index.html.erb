@@ -1,0 +1,111 @@
+<!-- app/views/home/index.html.erb -->
+
+<div class="min-h-screen w-full bg-stone-50 text-neutral-900">
+
+  <!-- Navigation -->
+  <section class="mx-auto max-w-[1600px] px-8 py-6 xl:px-12">
+    <nav class="flex items-center justify-between border-b border-neutral-200 pb-4">
+      <div>
+        <h1 class="text-2xl font-semibold tracking-[0.2em] uppercase">Lumiere</h1>
+      </div>
+
+      <div class="hidden gap-8 text-sm lg:flex">
+        <a href="#" class="hover:text-neutral-500">New Arrivals</a>
+        <a href="#" class="hover:text-neutral-500">Living Room</a>
+        <a href="#" class="hover:text-neutral-500">Bedroom</a>
+        <a href="#" class="hover:text-neutral-500">Lighting</a>
+        <a href="#" class="hover:text-neutral-500">Decor</a>
+      </div>
+
+      <div class="flex gap-4 text-sm">
+        <a href="#" class="hover:text-neutral-500">Search</a>
+        <a href="#" class="hover:text-neutral-500">Cart</a>
+      </div>
+    </nav>
+  </section>
+
+    <!-- Hero Section -->
+  <section
+    class="w-full min-h-[720px] bg-cover bg-center bg-no-repeat"
+    style="background-image:
+      linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+      url('<%= asset_path("Living-Room.jpg") %>');">
+    
+    <div class="mx-auto flex min-h-[720px] max-w-[1600px] items-center px-8 py-20 xl:px-12">
+      <div class="max-w-3xl text-white">
+        <p class="mb-4 text-sm uppercase tracking-[0.3em] text-white/80">
+          Modern Interiors, Timeless Comfort
+        </p>
+
+        <h2 class="text-5xl font-semibold leading-tight md:text-6xl xl:text-7xl">
+          Furniture curated for calm, elegant living.
+        </h2>
+
+        <p class="mt-6 max-w-xl text-lg leading-8 text-white/80">
+          Discover refined pieces for living rooms, bedrooms, and workspaces —
+          designed to bring warmth, simplicity, and balance into your home.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#" class="rounded-full border border-white px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-white hover:text-neutral-900">
+            Shop Collection
+          </a>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="mx-auto max-w-[1600px] px-8 py-16 xl:px-12">
+    <div class="mb-8 flex items-end justify-between">
+      <div>
+        <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">Categories</p>
+        <h3 class="mt-2 text-3xl font-semibold">Shop by room</h3>
+      </div>
+      <a href="#" class="text-sm text-neutral-500 hover:text-neutral-800">View all</a>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200">
+        <div class="mb-4 flex h-56 items-center justify-center rounded-2xl bg-stone-100 text-neutral-500">
+          Living Room
+        </div>
+        <h4 class="text-xl font-medium">Living Room</h4>
+        <p class="mt-2 text-sm leading-6 text-neutral-600">
+          Sofas, coffee tables, accent chairs, and layered textures.
+        </p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200">
+        <div class="mb-4 flex h-56 items-center justify-center rounded-2xl bg-stone-100 text-neutral-500">
+          Bedroom
+        </div>
+        <h4 class="text-xl font-medium">Bedroom</h4>
+        <p class="mt-2 text-sm leading-6 text-neutral-600">
+          Beds, side tables, soft lighting, and restful essentials.
+        </p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200">
+        <div class="mb-4 flex h-56 items-center justify-center rounded-2xl bg-stone-100 text-neutral-500">
+          Lighting
+        </div>
+        <h4 class="text-xl font-medium">Lighting</h4>
+        <p class="mt-2 text-sm leading-6 text-neutral-600">
+          Pendant lamps, sconces, and statement lighting pieces.
+        </p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-neutral-200">
+        <div class="mb-4 flex h-56 items-center justify-center rounded-2xl bg-stone-100 text-neutral-500">
+          Decor
+        </div>
+        <h4 class="text-xl font-medium">Decor</h4>
+        <p class="mt-2 text-sm leading-6 text-neutral-600">
+          Mirrors, vases, textiles, and finishing details for every room.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
