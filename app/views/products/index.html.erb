@@ -1,0 +1,81 @@
+<!-- app/views/products/index.html.erb -->
+<!-- Navigation -->
+<section class="mx-auto max-w-[1600px] px-8 py-6 xl:px-12">
+  <nav class="flex items-center justify-between border-b border-neutral-200 pb-4">
+    <div>
+      <%= link_to root_path, class: "text-2xl font-semibold tracking-[0.2em] uppercase hover:text-neutral-500" do %>
+        Lumiere
+      <% end %>
+    </div>
+    <div class="flex gap-4 text-sm">
+      <a href="#" class="hover:text-neutral-500">Search</a>
+      <a href="#" class="hover:text-neutral-500">Cart</a>
+    </div>
+  </nav>
+</section>
+<div class="min-h-screen bg-stone-50 px-8 py-16 text-neutral-900 xl:px-12">
+  <div class="mx-auto max-w-[1600px]">
+    <div class="mb-14 max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.35em] text-neutral-500 md:text-base">
+        Lumiere Collection
+      </p>
+      <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+        <%= @current_category == "all" ? "All Products" : @current_category.capitalize.pluralize %>
+      </h1>
+      <p class="mt-4 text-lg leading-8 text-neutral-600">
+        Explore timeless furniture and refined essentials designed to bring warmth, balance, and character into every room.
+      </p>
+    </div>
+    <div class="mb-8 flex items-center justify-between text-sm text-neutral-500">
+      <p><%= @products.count %> items</p>
+    </div>
+    <div class="mb-14 flex flex-wrap gap-4">
+      <%= link_to "All", products_path(sort: @current_sort == "default" ? nil : @current_sort),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_category == 'all' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+      <%= link_to "Sofas", products_path(category: "sofa", sort: @current_sort == "default" ? nil : @current_sort),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_category == 'sofa' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+      <%= link_to "Chairs", products_path(category: "chair", sort: @current_sort == "default" ? nil : @current_sort),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_category == 'chair' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+      <%= link_to "Tables", products_path(category: "table", sort: @current_sort == "default" ? nil : @current_sort),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_category == 'table' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+      <%= link_to "Beds", products_path(category: "bed", sort: @current_sort == "default" ? nil : @current_sort),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_category == 'bed' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+    </div>
+    <p class="mb-4 text-xs uppercase tracking-[0.3em] text-neutral-500">
+      Sort By
+    </p>
+    <div class="mb-14 flex flex-wrap gap-4">
+      <%= link_to "Default", products_path(category: @current_category == "all" ? nil : @current_category),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_sort == 'default' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+      <%= link_to "Price: Low to High", products_path(category: @current_category == "all" ? nil : @current_category, sort: "price_asc"),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_sort == 'price_asc' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+      <%= link_to "Price: High to Low", products_path(category: @current_category == "all" ? nil : @current_category, sort: "price_desc"),
+      class: "rounded-full px-6 py-3 text-sm font-medium transition #{ @current_sort == 'price_desc' ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-700 ring-1 ring-neutral-200 hover:bg-neutral-100' }" %>
+    </div>
+    <div class="grid gap-10 sm:grid-cols-2 xl:grid-cols-4">
+      <% @products.each do |product| %>
+        <div class="group overflow-hidden rounded-[2rem] bg-white/80 shadow-sm ring-1 ring-neutral-200/80 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div class="h-80 overflow-hidden bg-stone-100">
+            <% if product.image.attached? %>
+              <%= image_tag product.image, class: "h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" %>
+            <% end %>
+          </div>
+          <div class="space-y-3 p-6">
+            <p class="text-xs uppercase tracking-[0.3em] text-neutral-500">
+              <%= product.category.capitalize %>
+            </p>
+            <h2 class="text-2xl font-medium leading-snug">
+              <%= link_to product.name, product_path(product), class: "transition hover:text-neutral-500" %>
+            </h2>
+            <p class="text-sm text-neutral-600">
+              <%= product.color %>
+            </p>
+            <p class="pt-2 text-xl font-semibold text-neutral-900">
+              $<%= "%.2f" % product.price %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
