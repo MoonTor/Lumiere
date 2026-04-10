@@ -1,0 +1,70 @@
+<!-- app/views/orders/show.html.erb -->
+
+<div class="min-h-screen bg-stone-50 text-neutral-900">
+  <!-- Navbar -->
+  <%= render "shared/navbar" %>
+
+  <!-- Main Order Details -->
+  <section class="mx-auto max-w-[1600px] px-8 py-16 xl:px-12">
+    <div class="mb-12 max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+        Order Confirmation
+      </p>
+
+      <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+        Thank you for your order
+      </h1>
+
+      <p class="mt-4 text-lg leading-8 text-neutral-600">
+        Your order has been placed successfully.
+      </p>
+    </div>
+
+    <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-neutral-200">
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 pb-6">
+        <div>
+          <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Order ID</p>
+          <p class="mt-2 text-xl font-medium">#<%= @order.id %></p>
+        </div>
+
+        <div>
+          <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Status</p>
+          <p class="mt-2 text-xl font-medium capitalize"><%= @order.status %></p>
+        </div>
+
+        <div>
+          <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Total</p>
+          <p class="mt-2 text-xl font-medium">$<%= "%.2f" % @order.total %></p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <% @order.order_items.each do |item| %>
+          <div class="rounded-2xl bg-stone-50 p-6 ring-1 ring-neutral-200">
+            <h2 class="text-2xl font-medium"><%= item.product.name %></h2>
+
+            <p class="mt-2 text-neutral-600">
+              Quantity: <%= item.quantity %>
+            </p>
+
+            <p class="mt-2 text-neutral-600">
+              Price at purchase: $<%= "%.2f" % item.price %>
+            </p>
+
+            <p class="mt-2 font-semibold text-neutral-900">
+              Subtotal: $<%= "%.2f" % (item.price * item.quantity) %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <%= link_to "Continue Shopping", products_path,
+            class: "rounded-full bg-neutral-900 px-8 py-4 text-sm font-medium text-white transition hover:bg-neutral-700" %>
+
+        <%= link_to "View All Orders", orders_path,
+            class: "rounded-full bg-white px-8 py-4 text-sm font-medium text-neutral-900 ring-1 ring-neutral-200 transition hover:bg-neutral-100" %>
+      </div>
+    </div>
+  </section>
+</div>

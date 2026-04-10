@@ -1,5 +1,4 @@
 <!-- app/views/layouts/application.html.erb -->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,24 +9,56 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
     <main class="w-full min-h-screen">
+      <!-- Flash Messages -->
+      <div id="flash-container" class="fixed top-4 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4">
+        <% if notice %>
+          <div id="notice-flash" class="mb-3 flex items-center justify-between rounded-2xl bg-green-50 px-6 py-4 text-green-800 shadow-sm ring-1 ring-green-200 transition-opacity duration-500">
+            <span><%= notice %></span>
+            <button onclick="closeFlash('notice-flash')" class="ml-4 text-lg font-semibold hover:opacity-70">
+              ×
+            </button>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div id="alert-flash" class="mb-3 flex items-center justify-between rounded-2xl bg-red-50 px-6 py-4 text-red-800 shadow-sm ring-1 ring-red-200 transition-opacity duration-500">
+            <span><%= alert %></span>
+            <button onclick="closeFlash('alert-flash')" class="ml-4 text-lg font-semibold hover:opacity-70">
+              ×
+            </button>
+          </div>
+        <% end %>
+      </div>
       <%= yield %>
     </main>
+
+    <!-- This script makes it so the alerts and notices go away after a little bit of time -->
+    <script>
+      function closeFlash(id) {
+        const flash = document.getElementById(id);
+        if (flash) {
+          flash.style.opacity = "0";
+          setTimeout(() => flash.remove(), 500);
+        }
+      }
+
+      window.addEventListener("load", function () {
+        setTimeout(() => {
+          closeFlash("notice-flash");
+          closeFlash("alert-flash");
+        }, 4000); // 4 seconds
+      });
+    </script>
   </body>
 </html>

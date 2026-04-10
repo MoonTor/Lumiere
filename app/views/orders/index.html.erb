@@ -1,0 +1,60 @@
+<!-- app/views/orders/index.html.erb -->
+
+<div class="min-h-screen bg-stone-50 text-neutral-900">
+  <!-- Navbar -->
+  <%= render "shared/navbar" %>
+
+  <!-- Orders List -->
+  <section class="mx-auto max-w-[1600px] px-8 py-16 xl:px-12">
+    <div class="mb-12 max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+        Lumiere Account
+      </p>
+
+      <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+        Your Orders
+      </h1>
+
+      <p class="mt-4 text-lg leading-8 text-neutral-600">
+        View your previous purchases and order history.
+      </p>
+    </div>
+
+    <% if @orders.any? %>
+      <div class="space-y-6">
+        <% @orders.each do |order| %>
+          <%= link_to order_path(order), class: "block rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-neutral-200 transition hover:shadow-md" do %>
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Order ID</p>
+                <p class="mt-2 text-2xl font-medium">#<%= order.id %></p>
+              </div>
+
+              <div>
+                <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Status</p>
+                <p class="mt-2 text-lg font-medium capitalize"><%= order.status %></p>
+              </div>
+
+              <div>
+                <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Total</p>
+                <p class="mt-2 text-lg font-medium">$<%= "%.2f" % order.total %></p>
+              </div>
+
+              <div>
+                <p class="text-sm uppercase tracking-[0.2em] text-neutral-500">Placed</p>
+                <p class="mt-2 text-lg font-medium"><%= order.created_at.strftime("%B %d, %Y") %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="rounded-[2rem] bg-white p-12 text-center shadow-sm ring-1 ring-neutral-200">
+        <h2 class="text-3xl font-semibold">No orders yet</h2>
+        <p class="mt-4 text-lg text-neutral-600">
+          Once you place an order, it will appear here.
+        </p>
+      </div>
+    <% end %>
+  </section>
+</div>

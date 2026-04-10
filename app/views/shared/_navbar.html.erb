@@ -1,0 +1,43 @@
+<!-- app/views/shared/_navbar.html.erb -->
+<!-- This is the shared html.erb for the navbar that is used across the webpages -->
+
+<!-- Navigation -->
+<section class="mx-auto max-w-[1600px] px-8 py-6 xl:px-12">
+  <nav class="flex items-center justify-between border-b border-neutral-200 pb-4">
+
+    <!-- Left: Brand -->
+    <div>
+      <%= link_to root_path, class: "text-2xl font-semibold tracking-[0.2em] uppercase hover:text-neutral-500" do %>
+        Lumiere
+      <% end %>
+    </div>
+
+    <!-- Center: Category Navigation -->
+    <div class="hidden items-center gap-8 text-sm lg:flex">
+      <%= link_to "Sofas", products_path(category: "sofa"), class: "hover:text-neutral-500 transition" %>
+      <%= link_to "Dining", products_path(category: "table"), class: "hover:text-neutral-500 transition" %>
+      <%= link_to "Bedsets", products_path(category: "bed"), class: "hover:text-neutral-500 transition" %>
+      <%= link_to "Chairs", products_path(category: "chair"), class: "hover:text-neutral-500 transition" %>
+    </div>
+
+    <!-- Right: User Actions -->
+    <div class="flex items-center gap-6 text-sm">
+      <% if user_signed_in? %>
+        <%= link_to "Orders", orders_path, class: "hover:text-neutral-500 transition" %>
+
+        <%= link_to "Cart (#{current_user.cart&.cart_items&.sum(:quantity) || 0})",
+            cart_path,
+            class: "hover:text-neutral-500 transition" %>
+
+        <%= button_to "Logout",
+            destroy_user_session_path,
+            method: :delete,
+            class: "bg-transparent border-0 p-0 hover:text-neutral-500 transition" %>
+      <% else %>
+        <%= link_to "Sign In", new_user_session_path, class: "hover:text-neutral-500 transition" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "hover:text-neutral-500 transition" %>
+      <% end %>
+    </div>
+
+  </nav>
+</section>

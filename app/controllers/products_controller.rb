@@ -1,3 +1,6 @@
+# app/controllers/products_controller.rb
+# The main controller for products
+
 class ProductsController < ApplicationController
   def index
     @current_category = params[:category].presence || "all"
@@ -21,5 +24,6 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @review = Review.new
   end
 end

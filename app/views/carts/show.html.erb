@@ -1,0 +1,132 @@
+<!-- app/views/carts/show.html.erb -->
+<div class="min-h-screen bg-stone-50 text-neutral-900">
+  <!-- Navbar -->
+  <%= render "shared/navbar" %>
+  <!-- Main Cart Content -->
+  <section class="mx-auto max-w-[1600px] px-8 py-16 xl:px-12">
+    <!-- Page Heading -->
+    <div class="mb-12 max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+        Lumiere Cart
+      </p>
+      <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+        Your Cart
+      </h1>
+      <p class="mt-4 text-lg leading-8 text-neutral-600">
+        Review your selected pieces before continuing to checkout.
+      </p>
+    </div>
+    <% if @cart.cart_items.any? %>
+      <% total = 0 %>
+      <div class="grid gap-10 lg:grid-cols-[1.8fr_1fr]">
+        <!-- Left Side: Cart Items -->
+        <div class="space-y-6">
+          <% @cart.cart_items.each do |item| %>
+            <% product = item.product %>
+            <% subtotal = product.price * item.quantity %>
+            <% total += subtotal %>
+            <div class="overflow-hidden rounded-[2rem] bg-white shadow-sm ring-1 ring-neutral-200">
+              <div class="grid md:grid-cols-[220px_1fr]">
+                <!-- Product image -->
+                <div class="h-64 bg-stone-100">
+                  <% if product.image.attached? %>
+                    <%= image_tag product.image, class: "h-full w-full object-cover" %>
+                  <% end %>
+                </div>
+                <!-- Product details -->
+                <div class="flex flex-col justify-between p-6">
+                  <div>
+                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-500">
+                      <%= product.category.capitalize %>
+                    </p>
+                    <h2 class="mt-2 text-2xl font-medium">
+                      <%= link_to product.name, product_path(product), class: "hover:text-neutral-500" %>
+                    </h2>
+                    <p class="mt-3 text-sm text-neutral-600">
+                      Color: <span class="text-neutral-900"><%= product.color %></span>
+                    </p>
+                    <div class="mt-4 flex items-center gap-4">
+                      <span class="text-sm text-neutral-600">Quantity:</span>
+                      <div class="flex items-center overflow-hidden rounded-full bg-white ring-1 ring-neutral-200">
+                        <!-- Decrease quantity button -->
+                        <%= button_to "-",
+        cart_item_path(item, quantity: item.quantity - 1),
+        method: :patch,
+        class: "px-4 py-2 text-lg font-medium text-neutral-900 hover:bg-neutral-100" %>
+                        <!-- Current quantity -->
+                        <span class="px-4 py-2 text-sm font-medium text-neutral-900">
+                          <%= item.quantity %>
+                        </span>
+                        <!-- Increase quantity button -->
+                        <%= button_to "+",
+        cart_item_path(item, quantity: item.quantity + 1),
+        method: :patch,
+        class: "px-4 py-2 text-lg font-medium text-neutral-900 hover:bg-neutral-100" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-6 flex items-center justify-between">
+                    <p class="text-xl font-semibold text-neutral-900">
+                      $<%= "%.2f" % subtotal %>
+                    </p>
+                    <%= button_to "Remove",
+                        cart_item_path(item),
+                        method: :delete,
+                        class: "rounded-full bg-white px-5 py-2 text-sm font-medium text-neutral-900 ring-1 ring-neutral-200 transition hover:bg-neutral-100" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <!-- Right Side: Summary -->
+        <div>
+          <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-neutral-200 lg:sticky lg:top-8">
+            <h2 class="text-2xl font-semibold">Order Summary</h2>
+            <div class="mt-8 space-y-4 text-neutral-600">
+              <div class="flex items-center justify-between">
+                <span>Items</span>
+                <span><%= @cart.cart_items.sum(:quantity) %></span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Subtotal</span>
+                <span>$<%= "%.2f" % total %></span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Shipping</span>
+                <span>Calculated later</span>
+              </div>
+            </div>
+            <div class="mt-8 border-t border-neutral-200 pt-6">
+              <div class="flex items-center justify-between text-xl font-semibold text-neutral-900">
+                <span>Total</span>
+                <span>$<%= "%.2f" % total %></span>
+              </div>
+            </div>
+            <div class="mt-8 space-y-4">
+              <%= link_to "Proceed to Checkout",
+    new_order_path,
+    class: "block w-full rounded-full bg-neutral-900 px-6 py-4 text-center text-sm font-medium text-white transition hover:bg-neutral-700" %>
+              <%= link_to "Continue Shopping",
+                  products_path,
+                  class: "block w-full rounded-full bg-white px-6 py-4 text-center text-sm font-medium text-neutral-900 ring-1 ring-neutral-200 transition hover:bg-neutral-100" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <!-- Empty Cart State -->
+      <div class="rounded-[2rem] bg-white p-12 text-center shadow-sm ring-1 ring-neutral-200">
+        <h2 class="text-3xl font-semibold">Your cart is empty</h2>
+        <p class="mt-4 text-lg text-neutral-600">
+          Browse our collection and add a few pieces you love.
+        </p>
+        <div class="mt-8">
+          <%= link_to "Browse Products",
+              products_path,
+              class: "inline-block rounded-full bg-neutral-900 px-8 py-4 text-sm font-medium text-white transition hover:bg-neutral-700" %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</div>

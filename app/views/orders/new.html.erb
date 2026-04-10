@@ -1,0 +1,88 @@
+<!-- app/views/orders/new.html.erb -->
+
+<div class="min-h-screen bg-stone-50 text-neutral-900">
+  <!-- Navbar -->
+  <%= render "shared/navbar" %>
+
+  <!-- Checkout Content -->
+  <section class="mx-auto max-w-[1600px] px-8 py-16 xl:px-12">
+    <div class="mb-12 max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+        Checkout
+      </p>
+
+      <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-6xl">
+        Shipping Information
+      </h1>
+
+      <p class="mt-4 text-lg leading-8 text-neutral-600">
+        Enter your shipping details to complete your order.
+      </p>
+    </div>
+
+    <div class="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+      <!-- Left: Form -->
+      <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-neutral-200">
+        <%= form_with model: @order, local: true, class: "space-y-6" do |f| %>
+          <div>
+            <%= f.label :shipping_name, "Full Name", class: "mb-2 block text-sm font-medium text-neutral-700" %>
+            <%= f.text_field :shipping_name, class: "w-full rounded-2xl border border-neutral-300 px-4 py-3 outline-none transition focus:border-neutral-500" %>
+          </div>
+
+          <div>
+            <%= f.label :address, "Street Address", class: "mb-2 block text-sm font-medium text-neutral-700" %>
+            <%= f.text_field :address, class: "w-full rounded-2xl border border-neutral-300 px-4 py-3 outline-none transition focus:border-neutral-500" %>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-3">
+            <div>
+              <%= f.label :city, class: "mb-2 block text-sm font-medium text-neutral-700" %>
+              <%= f.text_field :city, class: "w-full rounded-2xl border border-neutral-300 px-4 py-3 outline-none transition focus:border-neutral-500" %>
+            </div>
+
+            <div>
+              <%= f.label :state, class: "mb-2 block text-sm font-medium text-neutral-700" %>
+              <%= f.text_field :state, class: "w-full rounded-2xl border border-neutral-300 px-4 py-3 outline-none transition focus:border-neutral-500" %>
+            </div>
+
+            <div>
+              <%= f.label :zip, "ZIP Code", class: "mb-2 block text-sm font-medium text-neutral-700" %>
+              <%= f.text_field :zip, class: "w-full rounded-2xl border border-neutral-300 px-4 py-3 outline-none transition focus:border-neutral-500" %>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <%= f.submit "Place Order",
+                class: "w-full rounded-full bg-neutral-900 px-6 py-4 text-sm font-medium text-white transition hover:bg-neutral-700 cursor-pointer" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Right: Summary -->
+      <div class="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-neutral-200 lg:sticky lg:top-8">
+        <h2 class="text-2xl font-semibold">Order Summary</h2>
+
+        <% total = 0 %>
+
+        <div class="mt-8 space-y-4">
+          <% @cart.cart_items.each do |item| %>
+            <% subtotal = item.product.price * item.quantity %>
+            <% total += subtotal %>
+
+            <div class="flex items-center justify-between text-neutral-600">
+              <span><%= item.product.name %> × <%= item.quantity %></span>
+              <span>$<%= "%.2f" % subtotal %></span>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mt-8 border-t border-neutral-200 pt-6">
+          <div class="flex items-center justify-between text-xl font-semibold text-neutral-900">
+            <span>Total</span>
+            <span>$<%= "%.2f" % total %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

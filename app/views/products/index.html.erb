@@ -1,18 +1,6 @@
 <!-- app/views/products/index.html.erb -->
-<!-- Navigation -->
-<section class="mx-auto max-w-[1600px] px-8 py-6 xl:px-12">
-  <nav class="flex items-center justify-between border-b border-neutral-200 pb-4">
-    <div>
-      <%= link_to root_path, class: "text-2xl font-semibold tracking-[0.2em] uppercase hover:text-neutral-500" do %>
-        Lumiere
-      <% end %>
-    </div>
-    <div class="flex gap-4 text-sm">
-      <a href="#" class="hover:text-neutral-500">Search</a>
-      <a href="#" class="hover:text-neutral-500">Cart</a>
-    </div>
-  </nav>
-</section>
+<!-- Navbar -->
+<%= render "shared/navbar" %>
 <div class="min-h-screen bg-stone-50 px-8 py-16 text-neutral-900 xl:px-12">
   <div class="mx-auto max-w-[1600px]">
     <div class="mb-14 max-w-3xl">

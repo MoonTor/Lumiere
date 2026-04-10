@@ -1,0 +1,84 @@
+<!-- app/views/devise/sessions/new.html.erb -->
+
+<div class="min-h-screen bg-stone-50 text-neutral-900">
+  <!-- Top Navigation -->
+  <section class="mx-auto max-w-[1600px] px-8 py-6 xl:px-12">
+    <nav class="flex items-center justify-between border-b border-neutral-200 pb-4">
+      <!-- Brand logo / home link -->
+      <div>
+        <%= link_to root_path, class: "text-2xl font-semibold tracking-[0.2em] uppercase hover:text-neutral-500" do %>
+          Lumiere
+        <% end %>
+      </div>
+
+      <!-- Right side links -->
+      <div class="flex gap-4 text-sm">
+        <%= link_to "Sign Up", new_user_registration_path, class: "hover:text-neutral-500" %>
+        <%= link_to "Home", root_path, class: "hover:text-neutral-500" %>
+      </div>
+    </nav>
+  </section>
+
+  <!-- Main Log In Section -->
+  <section class="mx-auto flex max-w-[1600px] items-center justify-center px-8 py-16 xl:px-12">
+    <div class="w-full max-w-xl rounded-[2rem] bg-white p-10 shadow-sm ring-1 ring-neutral-200">
+      <!-- Page heading -->
+      <div class="mb-8">
+        <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+          Lumiere Account
+        </p>
+
+        <h1 class="mt-3 text-4xl font-semibold tracking-tight">
+          Welcome Back
+        </h1>
+
+        <p class="mt-4 text-lg leading-8 text-neutral-600">
+          Log in to manage your account, view future orders, and continue shopping.
+        </p>
+      </div>
+
+      <!-- Devise error messages -->
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <!-- Log in form -->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+        
+        <!-- Email field -->
+        <div>
+          <%= f.label :email, class: "mb-2 block text-sm font-medium text-neutral-700" %>
+          <%= f.email_field :email,
+              autofocus: true,
+              autocomplete: "email",
+              class: "w-full rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-neutral-500" %>
+        </div>
+
+        <!-- Password field -->
+        <div>
+          <%= f.label :password, class: "mb-2 block text-sm font-medium text-neutral-700" %>
+          <%= f.password_field :password,
+              autocomplete: "current-password",
+              class: "w-full rounded-2xl border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 outline-none transition focus:border-neutral-500" %>
+        </div>
+
+        <!-- Remember me checkbox -->
+        <% if devise_mapping.rememberable? %>
+          <div class="flex items-center gap-3">
+            <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-500" %>
+            <%= f.label :remember_me, class: "text-sm text-neutral-700" %>
+          </div>
+        <% end %>
+
+        <!-- Submit button -->
+        <div class="pt-2">
+          <%= f.submit "Log In",
+              class: "w-full rounded-full bg-neutral-900 px-6 py-4 text-sm font-medium text-white transition hover:bg-neutral-700 cursor-pointer" %>
+        </div>
+      <% end %>
+
+      <!-- Extra auth links -->
+      <div class="mt-8 border-t border-neutral-200 pt-6 text-sm text-neutral-600">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </section>
+</div>
