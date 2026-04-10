@@ -1,25 +1,29 @@
 # README
 
-This is the documentation for the full-stack ecommerce site "Lumiere".
+This is the documentation for the full-stack ecommerce site "Lumiere". It uses Ruby on Rails Framework for the architecture and TailwindCSS for styling. 
 
+## Language and Tools version
 
+Ruby Version: 3.4.9
+Rails Version: 8.1.3
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+Make sure ruby is installed on your system if you are trying to run from local host
 
-* System dependencies
+1. Clone the repo
+2. Navigate to the root folder "Lumiere
 
-* Configuration
+Install Bundles/Gems
+3. Run "bundle install"
 
-* Database creation
+Initialize database
+4. Run "rails db:create"
+5. Run "rails db:migrate"
+6. Run "rails db:seed"
 
-* Database initialization
+Start Local Host Server
 
-* How to run the test suite
+7. Run "rails server" or "rails s"
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Click the link or copy it in your browser to use the app
