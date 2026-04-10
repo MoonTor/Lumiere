@@ -15,9 +15,11 @@ Make sure ruby is installed on your system if you are trying to run from local h
 2. Navigate to the root folder "Lumiere
 
 Install Bundles/Gems
+
 3. Run "bundle install"
 
 Initialize database
+
 4. Run "rails db:create"
 5. Run "rails db:migrate"
 6. Run "rails db:seed"
