@@ -2,6 +2,11 @@
 # This file contains the code to generate sample data in the database.
 # IN other words, it's sort of like running sql commands but for ruby on rails
 
+Review.destroy_all
+CartItem.destroy_all
+OrderItem.destroy_all
+Order.destroy_all
+Cart.destroy_all
 Product.destroy_all
 
 # sofas
